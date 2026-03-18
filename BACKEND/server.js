@@ -35,7 +35,7 @@ app.post("/api/weights", async (req, res) => {
   res.json(newWeight);
 });
 
-app.delete("/api/weight/:id", async (req, res) => {
+app.delete("/api/weights/:id", async (req, res) => {
   await Weight.findByIdAndDelete(req.params.id);
   res.json({ message: "Your information has sucessfully been deleted" });
 });
