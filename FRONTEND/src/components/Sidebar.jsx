@@ -17,6 +17,7 @@ const Sidebar = () => {
         <Link to="/log-workout" className="hover:bg-gray-700">
           Workout
         </Link>
+        <Link to="/goals">Goals</Link>
         <Link to="/history" className="hover:bg-gray-700">
           History
         </Link>

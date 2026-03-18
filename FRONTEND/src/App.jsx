@@ -4,14 +4,16 @@ import Dashboard from "./pages/Dashboard";
 import LogWeight from "./pages/LogWeight";
 import LogWorkout from "./pages/LogWorkout";
 import History from "./pages/History";
+import Goals from "./pages/Goals";
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Dashboard />}></Route>
-      <Route path="/log-weight" element={<LogWeight />}></Route>
-      <Route path="/log-workout" element={<LogWorkout />}></Route>
-      <Route path="/history" element={<History />}></Route>
+      <Route path="/goals" element={<Goals />} />
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/log-weight" element={<LogWeight />} />
+      <Route path="/log-workout" element={<LogWorkout />} />
+      <Route path="/history" element={<History />} />
     </Routes>
   );
 };
