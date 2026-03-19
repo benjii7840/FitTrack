@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -8,6 +9,7 @@ import Weight from "./models/weight.js";
 dotenv.config();
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 mongoose
