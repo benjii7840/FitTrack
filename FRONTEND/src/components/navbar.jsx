@@ -1,29 +1,28 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
-const Sidebar = () => {
+const Navbar = () => {
   return (
-    <div className="flex p-4  gap-8 justify-between">
-      <div className="">
-        <h1 className="text-black font-bold uppercase">Fit Track</h1>
-      </div>
-      <div className="flex gap-4 text-black items-center justify-center ">
-        <Link to="/" className="hover:bg-gray-700">
+    <nav className="bg-transparent shadow-sm px-8 py-4 flex items-center justify-between gap-8">
+      <h1 className="text-black font-bold uppercase tracking-wide">FitTrack</h1>
+      <div className="flex gap-6 text-gray-600 text-sm font-medium">
+        <Link to="/" className="hover:text-blue-500 transition">
           Dashboard
         </Link>
-        <Link to="/log-weight" className="hover:bg-gray-700">
+        <Link to="/log-weight" className="hover:text-blue-500 transition">
           Log Weight
         </Link>
-        <Link to="/log-workout" className="hover:bg-gray-700">
+        <Link to="/log-workout" className="hover:text-blue-500 transition">
           Workout
         </Link>
-        <Link to="/goals">Goals</Link>
-        <Link to="/history" className="hover:bg-gray-700">
+        <Link to="/goals" className="hover:text-blue-500 transition">
+          Goals
+        </Link>
+        <Link to="/history" className="hover:text-blue-500 transition">
           History
         </Link>
       </div>
-    </div>
+    </nav>
   );
 };
 
-export default Sidebar;
+export default Navbar;
