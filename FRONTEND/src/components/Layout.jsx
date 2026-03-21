@@ -5,7 +5,7 @@ const Layout = () => {
   return (
     <div className="flex">
       <Navbar />
-      <div className="flex bg-gray-100 p-8">
+      <div className="flex p-8  items-center justify-between">
         <Outlet />
       </div>
     </div>

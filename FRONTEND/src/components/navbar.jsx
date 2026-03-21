@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="bg-transparent shadow-sm px-8 py-4 flex items-center justify-between gap-8">
-      <h1 className="text-black font-bold uppercase tracking-wide">FitTrack</h1>
-      <div className="flex gap-6 text-gray-600 text-sm font-medium">
+    <nav className="bg-white border-b border-gray-200 px-8 py-4 flex items-center justify-between sticky top-0 z-10 gap-10">
+      <h1 className="text-blue-600 font-bold uppercase tracking-wide text-lg">
+        FitTrack
+      </h1>
+      <div className="flex gap-6 text-gray-600 text-sm font-medium  items-center justify-between">
         <Link to="/" className="hover:text-blue-500 transition">
           Dashboard
         </Link>
