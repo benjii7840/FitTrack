@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "./Navbar";
+import Navbar from "./navbar";
 
 const Layout = () => {
   return (
-    <div className="flex">
+    <div className="flex flex-col min-h-screen bg-gray-50">
       <Navbar />
-      <div className="flex p-8  items-center justify-between">
+      <div className="flex-1 p-8">
         <Outlet />
       </div>
     </div>

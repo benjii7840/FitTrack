@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="bg-white border-b border-gray-200 px-8 py-4 flex items-center justify-between sticky top-0 z-10 gap-10">
+    <nav className="bg-white border-b border-gray-200 px-8 py-4 flex items-center sticky top-0 z-10 gap-10">
       <h1 className="text-blue-600 font-bold uppercase tracking-wide text-lg">
         FitTrack
       </h1>
