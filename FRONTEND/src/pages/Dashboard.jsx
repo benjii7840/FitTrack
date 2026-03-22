@@ -20,9 +20,10 @@ const Dashboard = () => {
   }, []);
 
   const currentWeight =
-    weights.length > 0 ? weights[weights.length - 1].weight : "--";
+    weights.length > 0 ? Number(weights[weights.length - 1].weight) : null;
+
   const goalProgress =
-    goal && weights.length > 0
+    goal && currentWeight && goal.startWeight && goal.targetWeight
       ? Math.round(
           ((goal.startWeight - currentWeight) /
             (goal.startWeight - goal.targetWeight)) *

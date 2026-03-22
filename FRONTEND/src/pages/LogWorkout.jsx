@@ -7,7 +7,7 @@ const LogWorkout = () => {
   async function handleSubmit() {
     if (!workout || !date) return;
 
-    const reponse = await fetch("http://localhost:5001/api/workouts", {
+    const reponse = await fetch("http://localhost:5001/api/workout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +24,7 @@ const LogWorkout = () => {
   }
   return (
     <div className="max-w-lg mx-auto px-4 sm:px-0">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Log Weight</h1>
+      <h1 className="text-2xl font-bold text-gray-800 mb-6">Log Workout</h1>
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
         <div className="flex flex-col gap-4">
           <div>
