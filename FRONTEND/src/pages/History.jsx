@@ -1,7 +1,84 @@
-import React from "react";
+import { useState, useEffect } from "react";
 
 const History = () => {
-  return <div></div>;
+  const [weights, setWeights] = useState([]);
+  const [workouts, setWorkouts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5001/api/weights")
+      .then((res) => res.json())
+      .then((data) => setWeights(data));
+
+    fetch("http://localhost:5001/api/workout")
+      .then((res) => res.json())
+      .then((data) => setWorkouts(data));
+  }, []);
+
+  return (
+    <div className="max-w-4xl mx-auto px-4 sm:px-0">
+      <h1 className="text-2xl font-bold text-gray-800 mb-6">History</h1>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {/* Weight History */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-4">
+            Weight Logs
+          </h2>
+          {weights.length === 0 ? (
+            <p className="text-gray-400 text-sm">No weight entries yet.</p>
+          ) : (
+            <div className="flex flex-col gap-3">
+              {weights.map((entry) => (
+                <div
+                  key={entry._id}
+                  className="flex items-center justify-between border-b border-gray-50 pb-3"
+                >
+                  <div>
+                    <p className="text-sm font-medium text-gray-800">
+                      {entry.weight} kg
+                    </p>
+                    <p className="text-xs text-gray-400">
+                      {entry.notes || "No notes"}
+                    </p>
+                  </div>
+                  <p className="text-xs text-gray-400">{entry.date}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Workout History */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-4">
+            Workout Logs
+          </h2>
+          {workouts.length === 0 ? (
+            <p className="text-gray-400 text-sm">No workouts logged yet.</p>
+          ) : (
+            <div className="flex flex-col gap-3">
+              {workouts.map((entry) => (
+                <div
+                  key={entry._id}
+                  className="flex items-center justify-between border-b border-gray-50 pb-3"
+                >
+                  <div>
+                    <p className="text-sm font-medium text-gray-800">
+                      {entry.type}
+                    </p>
+                    <p className="text-xs text-gray-400">
+                      {entry.duration} mins
+                    </p>
+                  </div>
+                  <p className="text-xs text-gray-400">{entry.date}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default History;
