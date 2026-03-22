@@ -7,7 +7,7 @@ const Goals = () => {
   async function handleSubmit() {
     if (!targetWeight || !targetdate) return;
 
-    const reponse = await fetch(`${import.meta.env.VITE_API_URL}/api/weights`, {
+    const reponse = await fetch(`${import.meta.env.VITE_API_URL}/api/goal`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
