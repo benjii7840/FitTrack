@@ -14,10 +14,23 @@ const History = () => {
       .then((data) => setWorkouts(data));
   }, []);
 
+  async function handleDeleteWeight(id) {
+    await fetch(`http://localhost:5001/api/weights/${id}`, {
+      method: "DELETE",
+    });
+    setWeights(weights.filter((w) => w._id !== id));
+  }
+
+  async function handleDeleteWorkout(id) {
+    await fetch(`http://localhost:5001/api/workout/${id}`, {
+      method: "DELETE",
+    });
+    setWorkouts(workouts.filter((w) => w._id !== id));
+  }
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-0">
       <h1 className="text-2xl font-bold text-gray-800 mb-6">History</h1>
-
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {/* Weight History */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
@@ -41,7 +54,15 @@ const History = () => {
                       {entry.notes || "No notes"}
                     </p>
                   </div>
-                  <p className="text-xs text-gray-400">{entry.date}</p>
+                  <div className="flex items-center gap-3">
+                    <p className="text-xs text-gray-400">{entry.date}</p>
+                    <button
+                      onClick={() => handleDeleteWeight(entry._id)}
+                      className="text-gray-300 hover:text-red-400 transition text-sm"
+                    >
+                      ✕
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -70,7 +91,15 @@ const History = () => {
                       {entry.duration} mins
                     </p>
                   </div>
-                  <p className="text-xs text-gray-400">{entry.date}</p>
+                  <div className="flex items-center gap-3">
+                    <p className="text-xs text-gray-400">{entry.date}</p>
+                    <button
+                      onClick={() => handleDeleteWorkout(entry._id)}
+                      className="text-gray-300 hover:text-red-400 transition text-sm"
+                    >
+                      ✕
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>

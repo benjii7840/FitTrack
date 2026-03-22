@@ -1,4 +1,13 @@
 import { useState, useEffect } from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 const Dashboard = () => {
   const [weights, setWeights] = useState([]);
@@ -53,6 +62,29 @@ const Dashboard = () => {
             <span className="text-sm font-normal text-gray-400 ml-1">%</span>
           </p>
         </div>
+        {/* Weight Chart */}
+        {weights.length > 0 && (
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-4">
+              Weight Progress
+            </h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={weights}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                <XAxis dataKey="date" tick={{ fontSize: 12 }} />
+                <YAxis tick={{ fontSize: 12 }} />
+                <Tooltip />
+                <Line
+                  type="monotone"
+                  dataKey="weight"
+                  stroke="#3b82f6"
+                  strokeWidth={2}
+                  dot={{ fill: "#3b82f6" }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        )}
       </div>
     </div>
   );
