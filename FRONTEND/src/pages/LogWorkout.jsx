@@ -7,7 +7,7 @@ const LogWorkout = () => {
   async function handleSubmit() {
     if (!workout || !date) return;
 
-    const reponse = await fetch("http://localhost:5001/api/workout", {
+    const reponse = await fetch(`${import.meta.env.VITE_API_URL}/api/workout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

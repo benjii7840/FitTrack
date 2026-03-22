@@ -8,13 +8,16 @@ const LogWeight = () => {
   async function handleSubmit() {
     if (!weight || !date) return;
 
-    const response = await fetch("http://localhost:5001/api/weights", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/weights`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ weight: Number(weight), date, notes }),
       },
-      body: JSON.stringify({ weight: Number(weight), date, notes }),
-    });
+    );
 
     const data = await response.json();
     console.log("Saved:", data);

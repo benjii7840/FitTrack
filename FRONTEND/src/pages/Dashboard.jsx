@@ -15,15 +15,15 @@ const Dashboard = () => {
   const [goal, setGoal] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/weights")
+    fetch(`${import.meta.env.VITE_API_URL}/api/weights`)
       .then((res) => res.json())
       .then((data) => setWeights(data));
 
-    fetch("http://localhost:5001/api/workout")
+    fetch(`${import.meta.env.VITE_API_URL}/api/workouts`)
       .then((res) => res.json())
       .then((data) => setWorkouts(data));
 
-    fetch("http://localhost:5001/api/Goal")
+    fetch(`${import.meta.env.VITE_API_URL}/api/goal`)
       .then((res) => res.json())
       .then((data) => setGoal(data[0]));
   }, []);
@@ -33,16 +33,21 @@ const Dashboard = () => {
 
   const goalProgress =
     goal && currentWeight && goal.startWeight && goal.targetWeight
-      ? Math.round(
-          ((goal.startWeight - currentWeight) /
-            (goal.startWeight - goal.targetWeight)) *
-            100,
+      ? Math.min(
+          Math.round(
+            ((goal.startWeight - currentWeight) /
+              (goal.startWeight - goal.targetWeight)) *
+              100,
+          ),
+          100,
         )
       : "--";
 
   return (
     <div className="max-w-6xl mx-auto">
       <h1 className="text-2xl font-bold text-gray-800 mb-6">Dashboard</h1>
+
+      {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
           <p className="text-sm text-gray-500 mb-2">Current Weight</p>
@@ -62,30 +67,31 @@ const Dashboard = () => {
             <span className="text-sm font-normal text-gray-400 ml-1">%</span>
           </p>
         </div>
-        {/* Weight Chart */}
-        {weights.length > 0 && (
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-            <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-4">
-              Weight Progress
-            </h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={weights}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis dataKey="date" tick={{ fontSize: 12 }} />
-                <YAxis tick={{ fontSize: 12 }} />
-                <Tooltip />
-                <Line
-                  type="monotone"
-                  dataKey="weight"
-                  stroke="#3b82f6"
-                  strokeWidth={2}
-                  dot={{ fill: "#3b82f6" }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        )}
       </div>
+
+      {/* Weight Chart — full width below cards */}
+      {weights.length > 0 && (
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-4">
+            Weight Progress
+          </h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={weights}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+              <XAxis dataKey="date" tick={{ fontSize: 12 }} />
+              <YAxis tick={{ fontSize: 12 }} domain={["auto", "auto"]} />
+              <Tooltip />
+              <Line
+                type="monotone"
+                dataKey="weight"
+                stroke="#3b82f6"
+                strokeWidth={2}
+                dot={{ fill: "#3b82f6" }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      )}
     </div>
   );
 };

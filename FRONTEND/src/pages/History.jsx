@@ -9,20 +9,20 @@ const History = () => {
       .then((res) => res.json())
       .then((data) => setWeights(data));
 
-    fetch("http://localhost:5001/api/workout")
+    fetch(`${import.meta.env.VITE_API_URL}/api/workouts`)
       .then((res) => res.json())
       .then((data) => setWorkouts(data));
   }, []);
 
   async function handleDeleteWeight(id) {
-    await fetch(`http://localhost:5001/api/weights/${id}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/weights/${id}`, {
       method: "DELETE",
     });
     setWeights(weights.filter((w) => w._id !== id));
   }
 
   async function handleDeleteWorkout(id) {
-    await fetch(`http://localhost:5001/api/workout/${id}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/workouts${id}`, {
       method: "DELETE",
     });
     setWorkouts(workouts.filter((w) => w._id !== id));
